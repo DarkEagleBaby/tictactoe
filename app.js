@@ -1,4 +1,5 @@
 const squares = document.querySelectorAll('.square');
+const currentPlayerElm = document.querySelector('.currentPlayer')
 const resetBtn = document.querySelector('#reset')
 const circleSvg = `<svg width="100px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#000000" stroke-width="2"/>
@@ -23,6 +24,7 @@ const gameBoard = ((player1,player2)=>{
     let playersTurn = P1;
     let gameOver = false;
     let boardIndex = 0;
+    currentPlayerElm.innerHTML = `Current Player ${playersTurn.symbol}`
 
     let board = 
     ['','','',
@@ -45,6 +47,7 @@ const gameBoard = ((player1,player2)=>{
             square.innerHTML='';
             square.dataset.painted='false';
         })
+        currentPlayerElm.innerHTML = `Current Player ${playersTurn.symbol}`
     }
     const turn = (index) => {
         if(squares[index].dataset.painted === 'false' &&!gameOver){
@@ -54,6 +57,7 @@ const gameBoard = ((player1,player2)=>{
         squares[index].dataset.painted = 'true';
         checkWin()
         playersTurn = playersTurn === P1 ? P2 : P1;
+        currentPlayerElm.innerHTML = `Current Player ${playersTurn.symbol}`
     }
         else if(!gameOver){
             squares[index].classList.add('notAllowed')

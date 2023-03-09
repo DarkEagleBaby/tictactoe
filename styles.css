@@ -32,6 +32,9 @@ grid-template-rows:repeat(3,150px);
     position:absolute;
     top:40%;
     left:20%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
 }
 
 .cross svg,.circle svg{
@@ -77,4 +80,44 @@ grid-template-rows:repeat(3,150px);
         grid-template-columns:repeat(3,1fr);
         grid-template-rows:repeat(3,1fr) ;
     }
+}
+
+.square[data-board-index='0'],.square[data-board-index='3'],
+.square[data-board-index='6']{
+border-left:none;
+}
+
+.square[data-board-index='2'],.square[data-board-index='5'],
+.square[data-board-index='8']{
+border-right:none;
+}
+
+.square[data-board-index='0'],.square[data-board-index='1'],
+.square[data-board-index='2']{
+border-top:none;
+}
+
+.square[data-board-index='6'],.square[data-board-index='7'],
+.square[data-board-index='8']{
+border-bottom:none;
+}
+
+/* designing the overlay and card */
+
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    inset:0;
+    background-color:rgba(0,0,0,0.3);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-initial{
+position:relative;
+width:500px;
+height:350px;
+background-color:white;
 }
