@@ -4,6 +4,7 @@ const resetBtn = document.querySelector('#reset')
 const overlay = document.querySelector('.overlay');
 const endOverlay = document.querySelector('.end-overlay');
 const endText = document.querySelector('.end-text');
+const endScore = document.querySelector('.end-score');
 const playAgainBtn = document.querySelector('.play-again')
 
 
@@ -21,7 +22,8 @@ function player(sign){
     function getSign(){
         return sign;
     } 
-    return{getSign,symbol}
+    let score = 0;
+    return{getSign,symbol, score}
 }
 const P1 = player('cross');
 const P2 = player('circle');
@@ -44,7 +46,6 @@ const gameBoard = ((player1,player2)=>{
     ]
 
     const reset = function(){
-        playersTurn = P1;
         gameOver = false;
         board =    ['','','',
         '','','',
@@ -81,6 +82,7 @@ const gameBoard = ((player1,player2)=>{
           const [a, b, c] = winningcombos[i];
           if (board[a] !== '' && board[a] === board[b] && board[b] === board[c]) {
             console.log(`${playersTurn.getSign()} wins!`);
+            playersTurn.score+=1;
             gameOver = true;
             //calling gameoverscreen function
             endGameScreenWin();
@@ -113,6 +115,7 @@ const gameBoard = ((player1,player2)=>{
 
     const endGameScreenWin = ()=>{
         endOverlay.classList.remove('hidden');
+        endScore.innerHTML = `SCORE: ${P1.name}: ${P1.score} ${P2.name}: ${P2.score}`
         endText.innerHTML = `${playersTurn.name} Wins!`;
     }
 
@@ -124,6 +127,8 @@ const gameBoard = ((player1,player2)=>{
     return{board,reset,turn,getGameOver,onHoverEnter,onHoverExit,playersTurn}
 })()
 
+
+//game logic for clicking on square
 squares.forEach((square)=>{
     square.addEventListener('click',()=>{
         gameBoard.turn(square.dataset.boardIndex);
@@ -131,7 +136,7 @@ squares.forEach((square)=>{
 })
 
 
-
+//adding the 'ghost' symbol whenever hovering over a square
 squares.forEach((square)=>{
     square.addEventListener('mouseenter',()=>{
         gameBoard.onHoverEnter(square.dataset.boardIndex);
@@ -170,7 +175,7 @@ p1CircleOpt.addEventListener('click',()=>{
 })
 
 
-//handling the submission of player details:
+//handling the submission of player details in initial card:
 const playButton = document.querySelector('#play');
 const P1Name = document.querySelector('#P1Name');
 const P2Name = document.querySelector('#P2Name');
@@ -192,12 +197,15 @@ overlay.classList.add('hidden');
 }
 })
 
+//making sure that when i hit the reset button, the game logic resets and also the initial card shows up
 resetBtn.addEventListener('click',()=>{
     gameBoard.reset();
     overlay.classList.remove('hidden');
     //resetting overlay
     P1Name.value = '';
     P2Name.value = '';
+    P1.score = 0;
+    P2.score = 0;
     p1CircleOpt.classList.remove('option-selected');
     p1CrossOpt.classList.remove('option-selected');
     p2CircleOpt.classList.remove('option-selected');

@@ -253,5 +253,8 @@ width: 100%;
     font-size:80px;
 }
 
-
+.end-score{
+    color:white;
+    font-size:40px;
+}
 .hidden{display:none;}
