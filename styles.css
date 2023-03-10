@@ -78,22 +78,7 @@ grid-template-rows:repeat(3,150px);
     background-color:rgba(112, 128, 144,0.9);
 }
 
-@media(max-width:400px){
-    #reset{
-        top:88%;
-        left:60%;
-        margin-top:20px;
-    }
-    .currentPlayer{
-        top:90%;
-        left:20%;
-        margin-top:20px;
-    }
-    .board{
-        grid-template-columns:repeat(3,1fr);
-        grid-template-rows:repeat(3,1fr) ;
-    }
-}
+
 
 .square[data-board-index='0'],.square[data-board-index='3'],
 .square[data-board-index='6']{
@@ -258,3 +243,36 @@ width: 100%;
     font-size:40px;
 }
 .hidden{display:none;}
+
+@media(max-width:400px){
+    body{overflow:hidden}
+    #reset{
+        top:85%;
+        left:65%;
+        margin-top:20px;
+    }
+    .currentPlayer{
+        height:100px;
+        top:80%;
+        left:5%;
+        margin-top:20px;
+    }
+    .board{
+        max-height:400px;
+        grid-template-columns:repeat(3,1fr);
+        grid-template-rows:repeat(3,1fr) ;
+    }
+    .card-initial{
+        width:300px;
+        height:500px;
+    }
+    .form-initial{
+        font-size:15px;
+    }
+    .player1 input,.player2 input{
+        padding:0
+    }
+    .end-text,.end-score{
+        font-size:30px;
+    }
+}
