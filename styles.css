@@ -258,7 +258,8 @@ width: 100%;
         margin-top:20px;
     }
     .board{
-        max-height:400px;
+        margin-top:100px;
+        height:400px;
         grid-template-columns:repeat(3,1fr);
         grid-template-rows:repeat(3,1fr) ;
         margin-bottom:100px;
